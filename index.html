@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
@@ -36,63 +36,65 @@
     </script>
 
     <style>
-        /* Reading Progress Indicator - GSOLE Purple to Green Gradient */
+        /* Reading Progress Indicator - High Contrast Light Theme Gradient */
         #progress-bar {
             position: fixed;
             top: 0;
             left: 0;
-            height: 4px;
-            background: linear-gradient(to right, #4a1d96, #047857);
+            height: 5px;
+            background: linear-gradient(to right, #6b21a8, #047857);
             width: 0%;
             z-index: 100;
             transition: width 0.1s ease-out;
         }
 
-        /* Reading themes with high contrast ratios */
+        /* WCAG Compliant High Contrast Focus Indicators */
+        *:focus-visible {
+            outline: 3px solid #6b21a8 !important;
+            outline-offset: 3px !important;
+            border-radius: 4px;
+        }
+
+        /* Skip link for screen readers & keyboard navigation */
+        .skip-to-content {
+            position: absolute;
+            top: -100px;
+            left: 1rem;
+            background: #4c1d95;
+            color: #ffffff;
+            padding: 0.75rem 1.25rem;
+            z-index: 9999;
+            font-weight: 700;
+            border-radius: 0.5rem;
+            transition: top 0.2s ease-in-out;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+        .skip-to-content:focus {
+            top: 1rem;
+        }
+
+        /* Standardized Light Theme (Consistent across all browsers & devices) */
         .theme-light {
             background-color: #f8fafc;
             color: #0f172a;
         }
         .theme-light .card-bg {
             background-color: #ffffff;
-            border-color: #cbd5e1;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06);
+            border-color: #e2e8f0;
+            box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.05);
+        }
+        .theme-light .article-text, .theme-light p, .theme-light li {
+            color: #1e293b !important;
         }
 
-        .theme-sepia {
-            background-color: #f4e7d1;
-            color: #1a0f08;
-        }
-        .theme-sepia .card-bg {
-            background-color: #fffdf7;
-            border-color: #d8c4a0;
-            box-shadow: 0 1px 3px 0 rgba(60, 40, 15, 0.06);
-        }
-        .theme-sepia .article-text, .theme-sepia p, .theme-sepia li {
-            color: #211209 !important;
-        }
-
-        .theme-dark {
-            background-color: #090d16;
-            color: #f8fafc;
-        }
-        .theme-dark .card-bg {
-            background-color: #111827;
-            border-color: #374151;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
-        }
-        .theme-dark .article-text, .theme-dark p, .theme-dark li {
-            color: #f1f5f9 !important;
-        }
-
-        /* Content font scale classes with improved line height & size */
-        .text-scale-sm { font-size: 1rem; line-height: 1.75; }
-        .text-scale-base { font-size: 1.1875rem; line-height: 1.85; }
-        .text-scale-lg { font-size: 1.35rem; line-height: 1.95; }
+        /* Content font scale classes with WCAG compliant line-heights */
+        .text-scale-sm { font-size: 1.0625rem; line-height: 1.8; }
+        .text-scale-base { font-size: 1.25rem; line-height: 1.9; }
+        .text-scale-lg { font-size: 1.4375rem; line-height: 2.0; }
 
         /* Smooth scroll margin for sticky headers */
         section {
-            scroll-margin-top: 5rem;
+            scroll-margin-top: 5.5rem;
         }
 
         @media print {
@@ -102,155 +104,156 @@
         }
     </style>
 </head>
-<body class="theme-dark font-sans antialiased selection:bg-purple-900 selection:text-purple-100 transition-colors duration-200">
+<body class="theme-light font-sans antialiased selection:bg-purple-100 selection:text-purple-900 transition-colors duration-200">
 
-    <!-- Progress Bar -->
-    <div id="progress-bar"></div>
+    <!-- WCAG 2.4.1 Bypass Block: Skip to Main Content Link -->
+    <a href="#article-content" class="skip-to-content focus:outline-none focus:ring-4 focus:ring-purple-400">
+        Skip to main content
+    </a>
 
-    <!-- Top Fixed Header -->
-    <header class="no-print sticky top-0 z-50 backdrop-blur-md bg-slate-900/95 border-b border-purple-500/20 transition-colors duration-200 shadow-sm">
+    <!-- Reading Progress Bar -->
+    <div id="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress"></div>
+
+    <header class="no-print sticky top-0 z-50 backdrop-blur-md bg-white/95 border-b border-purple-200/80 transition-colors duration-200 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <!-- Brand Title with GSOLE Purple/Green Stylized Logo Badge -->
+                <!-- Brand Title with Stylized Logo Badge -->
                 <div class="flex items-center gap-3">
-                    <div class="bg-gradient-to-br from-purple-800 to-emerald-700 text-white font-serif font-extrabold text-xl w-10 h-10 rounded-lg flex items-center justify-center shadow-md ring-2 ring-purple-900/10">
+                    <div class="bg-gradient-to-br from-purple-800 to-emerald-700 text-white font-serif font-extrabold text-xl w-10 h-10 rounded-lg flex items-center justify-center shadow-sm ring-2 ring-purple-300" aria-hidden="true">
                         G
                     </div>
                     <div>
-                        <span class="text-xs uppercase tracking-wider font-extrabold text-purple-300 block">Global Society of Online Literacy Educators</span>
-                        <h1 class="font-serif text-lg font-bold text-white leading-none">September 2026 Newsletter</h1>
+                        <span class="text-xs uppercase tracking-wider font-extrabold text-purple-900 block">Global Society of Online Literacy Educators</span>
+                        <h1 class="font-serif text-lg font-bold text-slate-900 leading-none">September 2026 Newsletter</h1>
                     </div>
                 </div>
 
                 <!-- Right Action Bar Controls -->
                 <div class="flex items-center space-x-2 sm:space-x-4">
-                    <!-- Font Size Controls -->
-                    <div class="hidden md:flex items-center bg-slate-800 p-1 rounded-lg text-xs font-bold text-slate-200">
-                        <button onclick="setFontSize('sm')" id="btn-font-sm" class="px-2.5 py-1 rounded text-slate-300 hover:text-white">A-</button>
-                        <button onclick="setFontSize('base')" id="btn-font-base" class="px-2.5 py-1 rounded bg-slate-700 shadow-sm text-white font-black">A</button>
-                        <button onclick="setFontSize('lg')" id="btn-font-lg" class="px-2.5 py-1 rounded text-slate-300 hover:text-white">A+</button>
+                    <!-- Font Size Controls with Accessible Labels -->
+                    <div class="hidden md:flex items-center bg-slate-100 p-1 rounded-lg text-xs font-bold text-slate-700 border border-slate-200" role="group" aria-label="Font size controls">
+                        <button onclick="setFontSize('sm')" id="btn-font-sm" aria-label="Small font size" class="px-3 py-1.5 rounded text-slate-700 hover:text-slate-900 hover:bg-slate-200 transition">A-</button>
+                        <button onclick="setFontSize('base')" id="btn-font-base" aria-label="Default font size" class="px-3 py-1.5 rounded bg-purple-800 text-white font-black shadow-sm transition">A</button>
+                        <button onclick="setFontSize('lg')" id="btn-font-lg" aria-label="Large font size" class="px-3 py-1.5 rounded text-slate-700 hover:text-slate-900 hover:bg-slate-200 transition">A+</button>
                     </div>
 
                     <!-- Print / PDF Button -->
-                    <button onclick="window.print()" title="Print or Export PDF" class="p-2 rounded-lg text-slate-200 hover:bg-slate-800 transition">
-                        <i class="fa-solid fa-print"></i>
+                    <button onclick="window.print()" title="Print or Export PDF" aria-label="Print or Export Newsletter issue as PDF" class="p-2.5 rounded-lg text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition focus:ring-2 focus:ring-purple-500">
+                        <i class="fa-solid fa-print text-lg" aria-hidden="true"></i>
                     </button>
 
                     <!-- Mobile Menu Toggle Button -->
-                    <button onclick="toggleMobileNav()" class="lg:hidden p-2 text-slate-100">
-                        <i class="fa-solid fa-bars text-xl"></i>
+                    <button onclick="toggleMobileNav()" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle mobile navigation menu" class="lg:hidden p-2.5 text-slate-700 rounded-lg hover:bg-slate-100">
+                        <i class="fa-solid fa-bars text-xl" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Mobile Drawer Navigation -->
-    <div id="mobile-nav" class="no-print hidden fixed inset-0 z-40 bg-slate-950/60 backdrop-blur-sm lg:hidden" onclick="toggleMobileNav()">
-        <div class="fixed inset-y-0 right-0 w-4/5 max-w-sm bg-white dark:bg-slate-900 p-6 shadow-2xl flex flex-col justify-between" onclick="event.stopPropagation()">
+    <div id="mobile-nav" role="dialog" aria-modal="true" aria-label="Mobile Navigation" class="no-print hidden fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-sm lg:hidden" onclick="toggleMobileNav()">
+        <div class="fixed inset-y-0 right-0 w-4/5 max-w-sm bg-white border-l border-slate-200 p-6 shadow-2xl flex flex-col justify-between" onclick="event.stopPropagation()">
             <div>
-                <div class="flex items-center justify-between pb-4 border-b border-slate-300 dark:border-slate-800">
-                    <h2 class="font-bold text-slate-950 dark:text-white text-lg">Table of Contents</h2>
-                    <button onclick="toggleMobileNav()" class="text-slate-700 dark:text-slate-300 hover:text-slate-950"><i class="fa-solid fa-xmark text-xl"></i></button>
+                <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+                    <h2 class="font-bold text-slate-900 text-lg">Table of Contents</h2>
+                    <button onclick="toggleMobileNav()" aria-label="Close navigation menu" class="p-2 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100"><i class="fa-solid fa-xmark text-xl" aria-hidden="true"></i></button>
                 </div>
-                <nav class="mt-4 space-y-2 text-base font-semibold">
-                    <a href="#president-message" onclick="toggleMobileNav()" class="block p-2 rounded hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-900 dark:text-slate-100">President's Message</a>
-                    <a href="#gsole-conference" onclick="toggleMobileNav()" class="block p-2 rounded hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-900 dark:text-slate-100">CFP: GSOLE Conference</a>
-                    <a href="#iwac-2027" onclick="toggleMobileNav()" class="block p-2 rounded hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-900 dark:text-slate-100">CFP: Represent GSOLE at IWAC 2027</a>
-                    <a href="#gsole-webinar" onclick="toggleMobileNav()" class="block p-2 rounded hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-900 dark:text-slate-100">GSOLE Webinar: Building Reading Bridges</a>
-                    <a href="#archivist-position" onclick="toggleMobileNav()" class="block p-2 rounded hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-900 dark:text-slate-100">New Position: GSOLE Archivist</a>
-                    <a href="#salon-space" onclick="toggleMobileNav()" class="block p-2 rounded hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-900 dark:text-slate-100">Regular Salon Space</a>
-                    <a href="#role-cfp" onclick="toggleMobileNav()" class="block p-2 rounded hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-900 dark:text-slate-100">ROLE Call for Proposals</a>
-                    <a href="#publish-gsole" onclick="toggleMobileNav()" class="block p-2 rounded hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-900 dark:text-slate-100">Publish with GSOLE</a>
+                <nav class="mt-4 space-y-2 text-base font-semibold" aria-label="Mobile Table of Contents">
+                    <a href="#president-message" onclick="toggleMobileNav()" class="block p-3 rounded-lg hover:bg-purple-50 text-slate-800 transition">President's Message</a>
+                    <a href="#gsole-conference" onclick="toggleMobileNav()" class="block p-3 rounded-lg hover:bg-emerald-50 text-slate-800 transition">CFP: GSOLE Conference</a>
+                    <a href="#iwac-2027" onclick="toggleMobileNav()" class="block p-3 rounded-lg hover:bg-purple-50 text-slate-800 transition">CFP: Represent GSOLE at IWAC 2027</a>
+                    <a href="#gsole-webinar" onclick="toggleMobileNav()" class="block p-3 rounded-lg hover:bg-emerald-50 text-slate-800 transition">GSOLE Webinar: Building Reading Bridges</a>
+                    <a href="#archivist-position" onclick="toggleMobileNav()" class="block p-3 rounded-lg hover:bg-purple-50 text-slate-800 transition">New Position: GSOLE Archivist</a>
+                    <a href="#salon-space" onclick="toggleMobileNav()" class="block p-3 rounded-lg hover:bg-emerald-50 text-slate-800 transition">Regular Salon Space</a>
+                    <a href="#role-cfp" onclick="toggleMobileNav()" class="block p-3 rounded-lg hover:bg-purple-50 text-slate-800 transition">ROLE Call for Proposals</a>
+                    <a href="#publish-gsole" onclick="toggleMobileNav()" class="block p-3 rounded-lg hover:bg-emerald-50 text-slate-800 transition">Publish with GSOLE</a>
                 </nav>
             </div>
-            <div class="pt-4 border-t border-slate-300 dark:border-slate-800 text-xs font-bold text-slate-600 dark:text-slate-400">
+            <div class="pt-4 border-t border-slate-200 text-xs font-bold text-slate-500">
                 GSOLE September 2026 Edition
             </div>
         </div>
     </div>
 
-    <!-- Main Layout Container -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
             <!-- Sidebar Navigation (Desktop Sticky Sidebar) -->
-            <aside class="no-print hidden lg:block lg:col-span-3 sticky top-24 space-y-6">
+            <aside class="no-print hidden lg:block lg:col-span-3 sticky top-24 space-y-6" aria-label="Issue Navigation Sidebar">
                 <!-- Search Box -->
-                <div class="card-bg rounded-xl p-4 border border-purple-900/10 dark:border-slate-800 shadow-sm">
-                    <label for="search-input" class="text-xs font-extrabold uppercase tracking-wider text-purple-900 dark:text-purple-300 block mb-2">Search Issue</label>
+                <div class="card-bg rounded-xl p-4 border border-slate-200 shadow-sm">
+                    <label for="search-input" class="text-xs font-extrabold uppercase tracking-wider text-purple-900 block mb-2">Search Issue</label>
                     <div class="relative">
-                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-purple-700 dark:text-purple-400 text-sm"></i>
-                        <input id="search-input" type="text" placeholder="Search topics, authors..." onkeyup="filterArticles()" class="w-full pl-9 pr-3 py-2 text-sm font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-950 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-600">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-purple-700 text-sm" aria-hidden="true"></i>
+                        <input id="search-input" type="text" placeholder="Search topics, authors..." onkeyup="filterArticles()" aria-label="Search topics or keywords in this issue" class="w-full pl-9 pr-3 py-2 text-sm font-medium rounded-lg border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-600">
                     </div>
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="card-bg rounded-xl p-5 border border-purple-900/10 dark:border-slate-800 shadow-sm space-y-3">
-                    <h3 class="text-xs font-extrabold uppercase tracking-widest text-purple-900 dark:text-purple-300">In This Issue</h3>
-                    <nav class="space-y-1 text-sm">
-                        <a href="#president-message" class="nav-link block px-3 py-2 rounded-lg text-slate-900 dark:text-slate-100 hover:bg-purple-100 dark:hover:bg-purple-950/50 hover:text-purple-950 transition font-bold">President's Message</a>
-                        <a href="#gsole-conference" class="nav-link block px-3 py-2 rounded-lg text-slate-900 dark:text-slate-100 hover:bg-emerald-100 dark:hover:bg-emerald-950/50 hover:text-emerald-950 transition font-bold">CFP: GSOLE Conference</a>
-                        <a href="#iwac-2027" class="nav-link block px-3 py-2 rounded-lg text-slate-900 dark:text-slate-100 hover:bg-purple-100 dark:hover:bg-purple-950/50 hover:text-purple-950 transition font-bold">CFP: IWAC 2027</a>
-                        <a href="#gsole-webinar" class="nav-link block px-3 py-2 rounded-lg text-slate-900 dark:text-slate-100 hover:bg-emerald-100 dark:hover:bg-emerald-950/50 hover:text-emerald-950 transition font-bold">Webinar: Durable Reading</a>
-                        <a href="#archivist-position" class="nav-link block px-3 py-2 rounded-lg text-slate-900 dark:text-slate-100 hover:bg-purple-100 dark:hover:bg-purple-950/50 hover:text-purple-950 transition font-bold">Position: GSOLE Archivist</a>
-                        <a href="#salon-space" class="nav-link block px-3 py-2 rounded-lg text-slate-900 dark:text-slate-100 hover:bg-emerald-100 dark:hover:bg-emerald-950/50 hover:text-emerald-950 transition font-bold">Regular Salon Space</a>
-                        <a href="#role-cfp" class="nav-link block px-3 py-2 rounded-lg text-slate-900 dark:text-slate-100 hover:bg-purple-100 dark:hover:bg-purple-950/50 hover:text-purple-950 transition font-bold">ROLE Call for Proposals</a>
-                        <a href="#publish-gsole" class="nav-link block px-3 py-2 rounded-lg text-slate-900 dark:text-slate-100 hover:bg-emerald-100 dark:hover:bg-emerald-950/50 hover:text-emerald-950 transition font-bold">Publish with GSOLE</a>
+                <div class="card-bg rounded-xl p-5 border border-slate-200 shadow-sm space-y-3">
+                    <h2 class="text-xs font-extrabold uppercase tracking-widest text-purple-900">In This Issue</h2>
+                    <nav class="space-y-1 text-sm" aria-label="Table of Contents">
+                        <a href="#president-message" class="nav-link block px-3 py-2 rounded-lg text-slate-800 hover:bg-purple-50 hover:text-purple-900 transition font-bold">President's Message</a>
+                        <a href="#gsole-conference" class="nav-link block px-3 py-2 rounded-lg text-slate-800 hover:bg-emerald-50 hover:text-emerald-900 transition font-bold">CFP: GSOLE Conference</a>
+                        <a href="#iwac-2027" class="nav-link block px-3 py-2 rounded-lg text-slate-800 hover:bg-purple-50 hover:text-purple-900 transition font-bold">CFP: IWAC 2027</a>
+                        <a href="#gsole-webinar" class="nav-link block px-3 py-2 rounded-lg text-slate-800 hover:bg-emerald-50 hover:text-emerald-900 transition font-bold">Webinar: Durable Reading</a>
+                        <a href="#archivist-position" class="nav-link block px-3 py-2 rounded-lg text-slate-800 hover:bg-purple-50 hover:text-purple-900 transition font-bold">Position: GSOLE Archivist</a>
+                        <a href="#salon-space" class="nav-link block px-3 py-2 rounded-lg text-slate-800 hover:bg-emerald-50 hover:text-emerald-900 transition font-bold">Regular Salon Space</a>
+                        <a href="#role-cfp" class="nav-link block px-3 py-2 rounded-lg text-slate-800 hover:bg-purple-50 hover:text-purple-900 transition font-bold">ROLE Call for Proposals</a>
+                        <a href="#publish-gsole" class="nav-link block px-3 py-2 rounded-lg text-slate-800 hover:bg-emerald-50 hover:text-emerald-900 transition font-bold">Publish with GSOLE</a>
                     </nav>
                 </div>
 
                 <!-- Quick Metadata Card -->
-                <div class="card-bg rounded-xl p-5 border border-purple-900/10 dark:border-slate-800 shadow-sm text-xs space-y-3 font-semibold text-slate-800 dark:text-slate-200">
+                <div class="card-bg rounded-xl p-5 border border-slate-200 shadow-sm text-xs space-y-3 font-semibold text-slate-700">
                     <div class="flex items-center gap-2">
-                        <i class="fa-regular fa-calendar text-purple-700 dark:text-purple-400"></i>
-                        <span class="font-bold">September 2026</span>
+                        <i class="fa-regular fa-calendar text-purple-800 text-sm" aria-hidden="true"></i>
+                        <span class="font-bold text-slate-900">September 2026</span>
                     </div>
                     <div class="flex items-center gap-2">
-                        <i class="fa-regular fa-clock text-emerald-700 dark:text-emerald-400"></i>
-                        <span class="font-bold">~8 min read time</span>
+                        <i class="fa-regular fa-clock text-emerald-800 text-sm" aria-hidden="true"></i>
+                        <span class="font-bold text-slate-900">~8 min read time</span>
                     </div>
-                    <div class="pt-2 border-t border-slate-300 dark:border-slate-800">
-                        <p class="text-slate-700 dark:text-slate-300 font-medium">Official Publication of the Global Society of Online Literacy Educators.</p>
+                    <div class="pt-2 border-t border-slate-200">
+                        <p class="text-slate-600 font-medium">Official Publication of the Global Society of Online Literacy Educators.</p>
                     </div>
                 </div>
             </aside>
 
-            <!-- Main Content Reader Body -->
-            <main class="lg:col-span-9 space-y-10" id="article-content">
+            <main class="lg:col-span-9 space-y-10" id="article-content" tabindex="-1">
 
                 <!-- Publication Masthead Header -->
-                <header class="border-b-2 border-purple-900 dark:border-purple-400 pb-8 space-y-4">
+                <header class="border-b-2 border-purple-800 pb-8 space-y-4">
                     <div class="flex flex-wrap items-center justify-between gap-2">
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-extrabold bg-gradient-to-r from-purple-800 to-emerald-700 text-white shadow-sm">
+                        <span class="inline-flex items-center px-3.5 py-1 rounded-full text-xs font-extrabold bg-gradient-to-r from-purple-800 to-emerald-800 text-white shadow-sm">
                             Monthly Newsletter
                         </span>
-                        <span class="text-xs font-extrabold uppercase tracking-widest text-purple-900 dark:text-purple-300">
+                        <span class="text-xs font-extrabold uppercase tracking-widest text-purple-900">
                             September 2026 • Issue 33
                         </span>
                     </div>
-                    <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-950 dark:text-white">
+                    <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
                         Global Society of Online Literacy Educators
                     </h1>
-                    <p class="font-serif italic text-lg sm:text-2xl font-bold text-emerald-800 dark:text-emerald-400">
+                    <p class="font-serif italic text-lg sm:text-2xl font-bold text-emerald-900 leading-relaxed">
                         The Global Society of Online Literacy Educators (GSOLE) connects those who teach reading, alphabetic writing, and digital literacy in online educational settings.
                     </p>
                 </header>
 
                 <!-- SECTION 1: PRESIDENT'S MESSAGE -->
-                <section id="president-message" class="article-section card-bg p-6 sm:p-10 rounded-2xl border border-purple-900/10 dark:border-slate-800 shadow-sm space-y-6">
-                    <div class="flex items-center justify-between border-b border-slate-300 dark:border-slate-800 pb-4">
+                <section id="president-message" aria-labelledby="heading-president-message" class="article-section card-bg p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-4">
                         <div class="flex items-center space-x-3">
-                            <span class="w-3 h-8 bg-purple-800 dark:bg-purple-400 rounded-full inline-block"></span>
-                            <h2 class="font-serif text-2xl sm:text-3xl font-extrabold text-slate-950 dark:text-white">President's Message</h2>
+                            <span class="w-3 h-8 bg-purple-700 rounded-full inline-block" aria-hidden="true"></span>
+                            <h2 id="heading-president-message" class="font-serif text-2xl sm:text-3xl font-extrabold text-purple-950">President's Message</h2>
                         </div>
-                        <button onclick="copySectionLink('president-message')" class="no-print text-purple-900 hover:text-purple-700 dark:text-purple-300 dark:hover:text-white text-base" title="Copy section link">
-                            <i class="fa-solid fa-link"></i>
+                        <button onclick="copySectionLink('president-message')" class="no-print p-2 rounded-lg text-purple-800 hover:bg-purple-50 text-base transition" title="Copy link to President's Message" aria-label="Copy direct link to President's Message">
+                            <i class="fa-solid fa-link" aria-hidden="true"></i>
                         </button>
                     </div>
 
-                    <div class="article-text font-serif text-scale-base space-y-5 text-slate-950 dark:text-slate-50 leading-relaxed">
-                        <p class="font-sans font-bold text-slate-950 dark:text-white text-lg">Dear GSOLE Members,</p>
+                    <div class="article-text font-serif text-scale-base space-y-5 text-slate-800 leading-relaxed">
+                        <p class="font-sans font-bold text-slate-900 text-lg">Dear GSOLE Members,</p>
                         
                         <p>Let me begin by welcoming many of you to your new school years. I know some are a few weeks into your academic year and others are gearing up to start.</p>
 
@@ -260,67 +263,67 @@
 
                         <p>I retell my account of the Cyber Salon not to get the last word and declare myself champion. Instead, I see the value of Beth's argument, and I have been mulling the issue for the last week. But I also believe that as an organization focused on online literacy education, we offer writing studies something unique. And, arguably, a lot of good teaching innovations begin with online pedagogies because of the MacGyver-esque approach we are often compelled to dream up just to create good teaching and learning. As I wrote last month, writing studies is at an inflection point, and GSOLE is also deciding how to position itself within the field. Members of GSOLE have a lot to contribute to how writing instructors of all teaching modalities adopt digital pedagogies, especially GenAI pedagogies-a topic that has weighed heavily on the field for the last four years. We also have a lot to contribute to discussions about online writing instruction. As writing studies organizes and defines itself, I encourage us to continue to have these discussions about the focus and scope of the Global Society of Online Literacy Education. I look forward to having these conversations with you.</p>
 
-                        <div class="pt-4 font-sans border-t border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100">
+                        <div class="pt-4 font-sans border-t border-slate-200 text-slate-800">
                             <p class="font-bold">Best,</p>
-                            <p class="font-bold text-purple-950 dark:text-purple-200 text-lg">Kevin DePew, GSOLE President</p>
-                            <p class="text-base"><a href="mailto:kdepew@odu.edu" class="text-purple-900 dark:text-purple-300 hover:text-purple-700 font-bold underline">kdepew@odu.edu</a></p>
+                            <p class="font-bold text-purple-900 text-lg">Kevin DePew, GSOLE President</p>
+                            <p class="text-base"><a href="mailto:kdepew@odu.edu" class="text-purple-800 hover:text-purple-950 font-bold underline underline-offset-4 hover:decoration-2 transition">kdepew@odu.edu</a></p>
                         </div>
                     </div>
                 </section>
 
                 <!-- SECTION 2: CFP GSOLE CONFERENCE -->
-                <section id="gsole-conference" class="article-section card-bg p-6 sm:p-10 rounded-2xl border border-emerald-900/20 dark:border-slate-800 shadow-md space-y-6">
-                    <div class="flex items-center justify-between border-b border-slate-300 dark:border-slate-800 pb-4">
+                <section id="gsole-conference" aria-labelledby="heading-gsole-conference" class="article-section card-bg p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-4">
                         <div class="flex items-center space-x-3">
-                            <span class="w-3 h-8 bg-emerald-700 dark:bg-emerald-400 rounded-full inline-block"></span>
-                            <h2 class="font-serif text-2xl sm:text-3xl font-extrabold text-slate-950 dark:text-white">GSOLE Conference 2027: Beyond Engagement: Opening Doors and Building Community for the Future of Online Literacy Education</h2>
+                            <span class="w-3 h-8 bg-emerald-600 rounded-full inline-block" aria-hidden="true"></span>
+                            <h2 id="heading-gsole-conference" class="font-serif text-2xl sm:text-3xl font-extrabold text-slate-900">GSOLE Conference 2027: Beyond Engagement: Opening Doors and Building Community for the Future of Online Literacy Education</h2>
                         </div>
-                        <button onclick="copySectionLink('gsole-conference')" class="no-print text-emerald-800 hover:text-emerald-950 dark:text-emerald-300 text-base" title="Copy section link">
-                            <i class="fa-solid fa-link"></i>
+                        <button onclick="copySectionLink('gsole-conference')" class="no-print p-2 rounded-lg text-emerald-800 hover:bg-emerald-50 text-base transition" title="Copy link to GSOLE Conference section" aria-label="Copy direct link to GSOLE Conference section">
+                            <i class="fa-solid fa-link" aria-hidden="true"></i>
                         </button>
                     </div>
 
-                    <div class="relative overflow-hidden rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-slate-900 via-slate-900/95 to-emerald-950/50 p-6 sm:p-8 shadow-xl">
-                        <!-- Background Glow Accent -->
-                        <div class="absolute -top-12 -right-12 w-56 h-56 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="relative overflow-hidden rounded-2xl border border-emerald-300 bg-gradient-to-br from-emerald-50/80 via-white to-emerald-100/40 p-6 sm:p-8 shadow-md">
+                        <!-- Background Accent -->
+                        <div class="absolute -top-12 -right-12 w-56 h-56 bg-emerald-200/40 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
 
                         <div class="relative z-10 space-y-6">
                             <!-- Top Info Header & Date Spotlight -->
                             <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                                 <!-- Date Badge Box -->
-                                <div class="md:col-span-5 bg-slate-950/80 border border-emerald-500/40 rounded-xl p-4 flex items-center gap-4 shadow-md">
-                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-emerald-600 to-teal-700 text-white flex items-center justify-center shrink-0 shadow-inner">
+                                <div class="md:col-span-5 bg-white border border-emerald-300 rounded-xl p-4 flex items-center gap-4 shadow-sm">
+                                    <div class="w-12 h-12 rounded-lg bg-emerald-700 text-white flex items-center justify-center shrink-0 shadow-sm" aria-hidden="true">
                                         <i class="fa-regular fa-calendar-days text-xl"></i>
                                     </div>
                                     <div>
-                                        <span class="text-xs uppercase font-extrabold tracking-wider text-emerald-400 block">Conference Dates</span>
-                                        <span class="text-lg font-extrabold text-white font-sans">February 3–5, 2027</span>
+                                        <span class="text-xs uppercase font-extrabold tracking-wider text-emerald-900 block">Conference Dates</span>
+                                        <span class="text-lg font-extrabold text-slate-900 font-sans">February 3–5, 2027</span>
                                     </div>
                                 </div>
 
                                 <!-- Announcement Summary -->
                                 <div class="md:col-span-7">
-                                    <p class="text-sm font-serif italic text-slate-200 leading-relaxed">
+                                    <p class="text-base font-serif italic text-slate-800 leading-relaxed">
                                         Join online literacy educators worldwide to explore opening doors and building community. The complete Call for Papers and direct submission portal are now available below.
                                     </p>
                                 </div>
                             </div>
 
                             <!-- Action Buttons Row -->
-                            <div class="pt-3 border-t border-slate-700/60 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-3.5">
-                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdhCvsODS1mqbOLPQq759jXpVQg0cJqHDjOpxIj7vhG5NVjQg/viewform" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-lg bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-sans font-bold text-sm transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5">
-                                    <i class="fa-solid fa-paper-plane text-base"></i>
+                            <div class="pt-4 border-t border-emerald-200 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-3.5">
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdhCvsODS1mqbOLPQq759jXpVQg0cJqHDjOpxIj7vhG5NVjQg/viewform" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-sans font-bold text-sm transition-all shadow-md hover:shadow-lg focus:ring-2 focus:ring-emerald-400">
+                                    <i class="fa-solid fa-paper-plane text-base" aria-hidden="true"></i>
                                     <span>Submit your Proposal Here Directly</span>
                                 </a>
 
-                                <a href="gsole-2027-conference-cfp.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-lg bg-slate-800 hover:bg-slate-700 border border-emerald-500/40 text-emerald-300 hover:text-white font-sans font-bold text-sm transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5">
-                                    <i class="fa-solid fa-file-pdf text-base text-emerald-400"></i>
+                                <a href="gsole-2027-conference-cfp.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-lg bg-white hover:bg-emerald-50 border border-emerald-600 text-emerald-900 font-sans font-bold text-sm transition-all shadow-sm hover:shadow-md focus:ring-2 focus:ring-emerald-400">
+                                    <i class="fa-solid fa-file-pdf text-base text-emerald-700" aria-hidden="true"></i>
                                     <span>View & Download Conference Call for Proposals (PDF)</span>
                                 </a>
                             </div>
 
-                            <p class="text-xs font-sans text-slate-400 flex items-center gap-1.5">
-                                <i class="fa-solid fa-circle-info text-emerald-400"></i>
+                            <p class="text-xs font-sans text-slate-600 flex items-center gap-1.5">
+                                <i class="fa-solid fa-circle-info text-emerald-700" aria-hidden="true"></i>
                                 <span>The complete conference flyer and detailed submission guidelines will also be distributed via official email channels and published on the GSOLE website.</span>
                             </p>
                         </div>
@@ -328,25 +331,25 @@
                 </section>
 
                 <!-- SECTION 3: CFP REPRESENT GSOLE AT IWAC 2027 -->
-                <section id="iwac-2027" class="article-section card-bg p-6 sm:p-10 rounded-2xl border border-purple-900/10 dark:border-slate-800 shadow-sm space-y-6">
-                    <div class="flex items-center justify-between border-b border-slate-300 dark:border-slate-800 pb-4">
+                <section id="iwac-2027" aria-labelledby="heading-iwac-2027" class="article-section card-bg p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-4">
                         <div class="flex items-center space-x-3">
-                            <span class="w-3 h-8 bg-purple-800 dark:bg-purple-400 rounded-full inline-block"></span>
-                            <h2 class="font-serif text-2xl sm:text-3xl font-extrabold text-slate-950 dark:text-white">Call for Papers: Represent GSOLE at IWAC 2027</h2>
+                            <span class="w-3 h-8 bg-purple-700 rounded-full inline-block" aria-hidden="true"></span>
+                            <h2 id="heading-iwac-2027" class="font-serif text-2xl sm:text-3xl font-extrabold text-purple-950">Call for Papers: Represent GSOLE at IWAC 2027</h2>
                         </div>
-                        <button onclick="copySectionLink('iwac-2027')" class="no-print text-purple-900 hover:text-purple-700 dark:text-purple-300 text-base" title="Copy section link">
-                            <i class="fa-solid fa-link"></i>
+                        <button onclick="copySectionLink('iwac-2027')" class="no-print p-2 rounded-lg text-purple-800 hover:bg-purple-50 text-base transition" title="Copy link to IWAC section" aria-label="Copy direct link to IWAC section">
+                            <i class="fa-solid fa-link" aria-hidden="true"></i>
                         </button>
                     </div>
 
-                    <div class="article-text font-serif text-scale-base space-y-5 text-slate-950 dark:text-slate-50 leading-relaxed">
+                    <div class="article-text font-serif text-scale-base space-y-5 text-slate-800 leading-relaxed">
                         <p>GSOLE has an affiliate relationship with the Association for Writing Across the Curriculum (AWAC) and seeks members to represent our organization at the 2027 International Writing Across the Curriculum (IWAC) Conference, July 7-10, 2027, hosted by the University of Maine's Department of English. The call for proposals is out now and will close on October 15th.</p>
 
-                        <p>If you are planning to attend IWAC 2027 and would like to help represent GSOLE (including but not limited to potential participation in a sponsored panel), please contact Meghan Velez and Janine Morris, Affiliates Co-Chairs, at <a href="mailto:affiliates@gsole.org" class="text-purple-900 dark:text-purple-300 font-sans font-extrabold underline hover:text-purple-700">affiliates@gsole.org</a>.</p>
+                        <p>If you are planning to attend IWAC 2027 and would like to help represent GSOLE (including but not limited to potential participation in a sponsored panel), please contact Meghan Velez and Janine Morris, Affiliates Co-Chairs, at <a href="mailto:affiliates@gsole.org" class="text-purple-800 hover:text-purple-950 font-sans font-extrabold underline underline-offset-4 hover:decoration-2 transition">affiliates@gsole.org</a>.</p>
 
                         <div class="pt-2">
-                            <a href="https://iwac.wacclearinghouse.org/call/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-purple-700 hover:bg-purple-800 text-white font-sans font-bold text-sm transition shadow-md">
-                                <i class="fa-solid fa-paper-plane text-lg"></i>
+                            <a href="https://iwac.wacclearinghouse.org/call/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-purple-800 hover:bg-purple-900 text-white font-sans font-bold text-sm transition shadow-md focus:ring-2 focus:ring-purple-400">
+                                <i class="fa-solid fa-paper-plane text-lg" aria-hidden="true"></i>
                                 Submit your Proposal Here Directly
                             </a>
                         </div>
@@ -354,27 +357,27 @@
                 </section>
 
                 <!-- SECTION 4: GSOLE WEBINAR -->
-                <section id="gsole-webinar" class="article-section card-bg p-6 sm:p-10 rounded-2xl border border-emerald-900/10 dark:border-slate-800 shadow-sm space-y-6">
-                    <div class="flex items-center justify-between border-b border-slate-300 dark:border-slate-800 pb-4">
+                <section id="gsole-webinar" aria-labelledby="heading-gsole-webinar" class="article-section card-bg p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-4">
                         <div class="flex items-center space-x-3">
-                            <span class="w-3 h-8 bg-emerald-700 dark:bg-emerald-400 rounded-full inline-block"></span>
-                            <h2 class="font-serif text-2xl sm:text-3xl font-extrabold text-slate-950 dark:text-white">
+                            <span class="w-3 h-8 bg-emerald-600 rounded-full inline-block" aria-hidden="true"></span>
+                            <h2 id="heading-gsole-webinar" class="font-serif text-2xl sm:text-3xl font-extrabold text-slate-900">
                                 GSOLE Webinar: Yoimar Falcon’s , Building Reading Bridges: Durable Reading Practices for Multilingual Learners in Online and Hybrid College Courses
                             </h2>
                         </div>
-                        <button onclick="copySectionLink('gsole-webinar')" class="no-print text-emerald-800 hover:text-emerald-950 dark:text-emerald-300 text-base" title="Copy section link">
-                            <i class="fa-solid fa-link"></i>
+                        <button onclick="copySectionLink('gsole-webinar')" class="no-print p-2 rounded-lg text-emerald-800 hover:bg-emerald-50 text-base transition" title="Copy link to Webinar section" aria-label="Copy direct link to Webinar section">
+                            <i class="fa-solid fa-link" aria-hidden="true"></i>
                         </button>
                     </div>
 
-                    <div class="article-text font-serif text-scale-base space-y-5 text-slate-950 dark:text-slate-50 leading-relaxed">
+                    <div class="article-text font-serif text-scale-base space-y-5 text-slate-800 leading-relaxed">
                         <p>Reading in online and hybrid learning environments often happens privately. Students may complete an assigned article, chapter, or digital text without instructors being able to see how they approached the reading, where comprehension became difficult, what connections they made, or how their thinking changed. For multilingual learners, the reading process can involve additional layers of linguistic, cultural, and academic meaning-making that may remain equally invisible.</p>
 
                         <p>This interactive webinar explores durable reading practices that can help instructors, tutors, and other educators make students’ reading processes more visible while supporting deeper engagement with texts. Rather than centering instruction on a particular platform or application, the session focuses on reading practices that can transfer across technologies, courses, languages, and learning environments. The emphasis remains on reading itself: how readers enter a text, monitor understanding, make connections, interpret evidence, and leave a visible trace of their thinking.</p>
 
                         <div class="pt-2">
-                            <h3 class="font-sans font-bold text-lg text-slate-950 dark:text-white mb-3">Participants Will Gain:</h3>
-                            <ul class="list-disc pl-6 space-y-2 font-serif text-slate-950 dark:text-slate-50">
+                            <h3 class="font-sans font-bold text-lg text-slate-900 mb-3">Participants Will Gain:</h3>
+                            <ul class="list-disc pl-6 space-y-2.5 font-serif text-slate-800">
                                 <li>A transferable framework for making students’ reading processes visible in online and hybrid environments.</li>
                                 <li>Practical strategies for supporting multilingual readers as they engage with complex academic texts.</li>
                                 <li>Approaches for using brief writing and annotation to reveal reading comprehension and meaning-making.</li>
@@ -383,36 +386,36 @@
                             </ul>
                         </div>
 
-                        <div class="pt-4 border-t border-slate-300 dark:border-slate-800 space-y-2 font-sans">
-                            <h3 class="font-bold text-lg text-slate-950 dark:text-white">Registration Information:</h3>
-                            <p class="font-medium">Free for GSOLE members; <a href="https://glosole.wildapricot.org/Sys/Login?ReturnUrl=%2fsys%2fwebsite%2f%3fpageId%3d18405" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:text-emerald-300 font-bold underline">register here</a></p>
-                            <p class="font-medium">$15 for non-members</p>
-                            <p class="font-bold text-emerald-700 dark:text-emerald-400 pt-2"><a href="https://glosole.wildapricot.org/Sys/Login?ReturnUrl=%2fsys%2fwebsite%2f%3fpageId%3d7743" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:text-emerald-300 font-bold underline">Become a member!</a> ($30 regular; $20 students/contingent)</p>
+                        <div class="pt-4 border-t border-slate-200 space-y-2 font-sans">
+                            <h3 class="font-bold text-lg text-slate-900">Registration Information:</h3>
+                            <p class="font-medium text-slate-800">Free for GSOLE members; <a href="https://glosole.wildapricot.org/Sys/Login?ReturnUrl=%2fsys%2fwebsite%2f%3fpageId%3d18405" target="_blank" rel="noopener noreferrer" class="text-emerald-800 hover:text-emerald-950 font-bold underline underline-offset-4">register here</a></p>
+                            <p class="font-medium text-slate-800">$15 for non-members</p>
+                            <p class="font-bold text-emerald-900 pt-2"><a href="https://glosole.wildapricot.org/Sys/Login?ReturnUrl=%2fsys%2fwebsite%2f%3fpageId%3d7743" target="_blank" rel="noopener noreferrer" class="text-emerald-800 hover:text-emerald-950 font-bold underline underline-offset-4">Become a member!</a> ($30 regular; $20 students/contingent)</p>
                         </div>
                     </div>
                 </section>
 
                 <!-- SECTION 5: NEW POSITION: GSOLE ARCHIVIST -->
-                <section id="archivist-position" class="article-section card-bg p-6 sm:p-10 rounded-2xl border border-purple-900/10 dark:border-slate-800 shadow-sm space-y-6">
-                    <div class="flex items-center justify-between border-b border-slate-300 dark:border-slate-800 pb-4">
+                <section id="archivist-position" aria-labelledby="heading-archivist-position" class="article-section card-bg p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-4">
                         <div class="flex items-center space-x-3">
-                            <span class="w-3 h-8 bg-purple-800 dark:bg-purple-400 rounded-full inline-block"></span>
-                            <h2 class="font-serif text-2xl sm:text-3xl font-extrabold text-slate-950 dark:text-white">New Position: GSOLE Archivist</h2>
+                            <span class="w-3 h-8 bg-purple-700 rounded-full inline-block" aria-hidden="true"></span>
+                            <h2 id="heading-archivist-position" class="font-serif text-2xl sm:text-3xl font-extrabold text-purple-950">New Position: GSOLE Archivist</h2>
                         </div>
-                        <button onclick="copySectionLink('archivist-position')" class="no-print text-purple-900 hover:text-purple-700 dark:text-purple-300 text-base" title="Copy section link">
-                            <i class="fa-solid fa-link"></i>
+                        <button onclick="copySectionLink('archivist-position')" class="no-print p-2 rounded-lg text-purple-800 hover:bg-purple-50 text-base transition" title="Copy link to Archivist Position section" aria-label="Copy direct link to Archivist Position section">
+                            <i class="fa-solid fa-link" aria-hidden="true"></i>
                         </button>
                     </div>
 
-                    <div class="article-text font-serif text-scale-base space-y-5 text-slate-950 dark:text-slate-50 leading-relaxed">
+                    <div class="article-text font-serif text-scale-base space-y-5 text-slate-800 leading-relaxed">
                         <p>GSOLE has created an archivist position to help organize and store its content for efficient future retrieval. This is a great position for anyone who wants to apply the archival research methods they have studied. The job description is as follows:</p>
 
-                        <blockquote class="italic pl-5 border-l-4 border-purple-800 dark:border-purple-400 text-slate-900 dark:text-slate-100 font-medium">
+                        <blockquote class="italic pl-5 border-l-4 border-purple-600 text-slate-800 font-medium my-4 bg-purple-50/60 py-3 rounded-r-lg">
                             As an organization that operates predominantly virtually, GSOLE has generated a lot of online artifacts associated with its daily operations, and the resources it provides on the Online Literacy Educator community (e.g., conference, webinars, publications, certification course). As a result, we are looking for a head archivist who will take on the following responsibilities...
                         </blockquote>
 
                         <div class="pt-2">
-                            <ul class="list-disc pl-6 space-y-2.5 font-serif text-slate-950 dark:text-slate-50">
+                            <ul class="list-disc pl-6 space-y-2.5 font-serif text-slate-800">
                                 <li>Recruit members of Archive Committee</li>
                                 <li>Create a proposal for organizing, displaying, retrieving and sunsetting existing GSOLE artifacts</li>
                                 <li>Collaborate with leadership on formalized policy and procedure for the on-going creation, display, and retrieval of future artifacts</li>
@@ -423,36 +426,36 @@
                             </ul>
                         </div>
 
-                        <p class="font-sans font-medium text-slate-900 dark:text-slate-100 pt-2">
-                            If you are interested in this position or you know someone who might be interested, please have them contact me at <a href="mailto:kdepew@odu.edu" class="text-purple-900 dark:text-purple-300 font-bold underline hover:text-purple-700">kdepew@odu.edu</a>.
+                        <p class="font-sans font-medium text-slate-800 pt-2">
+                            If you are interested in this position or you know someone who might be interested, please have them contact me at <a href="mailto:kdepew@odu.edu" class="text-purple-800 hover:text-purple-950 font-bold underline underline-offset-4">kdepew@odu.edu</a>.
                         </p>
                     </div>
                 </section>
 
                 <!-- SECTION 6: SALON SPACE -->
-                <section id="salon-space" class="article-section card-bg p-6 sm:p-10 rounded-2xl border border-emerald-900/10 dark:border-slate-800 shadow-sm space-y-6">
-                    <div class="flex items-center justify-between border-b border-slate-300 dark:border-slate-800 pb-4">
+                <section id="salon-space" aria-labelledby="heading-salon-space" class="article-section card-bg p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-4">
                         <div class="flex items-center space-x-3">
-                            <span class="w-3 h-8 bg-emerald-700 dark:bg-emerald-400 rounded-full inline-block"></span>
-                            <h2 class="font-serif text-2xl sm:text-3xl font-extrabold text-slate-950 dark:text-white">GSOLE Hosts Regular Salon Space for Its Members</h2>
+                            <span class="w-3 h-8 bg-emerald-600 rounded-full inline-block" aria-hidden="true"></span>
+                            <h2 id="heading-salon-space" class="font-serif text-2xl sm:text-3xl font-extrabold text-slate-900">GSOLE Hosts Regular Salon Space for Its Members</h2>
                         </div>
-                        <button onclick="copySectionLink('salon-space')" class="no-print text-emerald-800 hover:text-emerald-950 dark:text-emerald-300 text-base" title="Copy section link">
-                            <i class="fa-solid fa-link"></i>
+                        <button onclick="copySectionLink('salon-space')" class="no-print p-2 rounded-lg text-emerald-800 hover:bg-emerald-50 text-base transition" title="Copy link to Salon section" aria-label="Copy direct link to Salon section">
+                            <i class="fa-solid fa-link" aria-hidden="true"></i>
                         </button>
                     </div>
 
-                    <div class="article-text font-serif text-scale-base space-y-5 text-slate-950 dark:text-slate-50 leading-relaxed">
+                    <div class="article-text font-serif text-scale-base space-y-5 text-slate-800 leading-relaxed">
                         <p>Join us for regular Salon events, spaces where you can informally gather to talk about timely topics with other GSOLE members and online literacy educators. These events take place on the first Tuesday of every month and are open to anyone, regardless of GSOLE membership status.</p>
 
                         <p>Come with your own online writing concerns. Or we can discuss the President's Message above.</p>
 
-                        <p class="font-sans font-semibold text-emerald-800 dark:text-emerald-300 pt-1">
+                        <p class="font-sans font-bold text-emerald-900 text-lg pt-1">
                             The next Cyber Salon will be held October 6 at 3:00pm EST.
                         </p>
 
                         <div class="pt-2">
-                            <a href="https://gsole.org/event-5884162" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-sans font-bold text-sm transition shadow-md">
-                                <i class="fa-solid fa-calendar-check text-lg"></i>
+                            <a href="https://gsole.org/event-5884162" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-sans font-bold text-sm transition shadow-md focus:ring-2 focus:ring-emerald-400">
+                                <i class="fa-solid fa-calendar-check text-lg" aria-hidden="true"></i>
                                 Register for the Next Cyber Salon Here
                             </a>
                         </div>
@@ -460,23 +463,23 @@
                 </section>
 
                 <!-- SECTION 7: ROLE CFP -->
-                <section id="role-cfp" class="article-section card-bg p-6 sm:p-10 rounded-2xl border border-purple-900/10 dark:border-slate-800 shadow-sm space-y-6">
-                    <div class="flex items-center justify-between border-b border-slate-300 dark:border-slate-800 pb-4">
+                <section id="role-cfp" aria-labelledby="heading-role-cfp" class="article-section card-bg p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-4">
                         <div class="flex items-center space-x-3">
-                            <span class="w-3 h-8 bg-purple-800 dark:bg-purple-400 rounded-full inline-block"></span>
-                            <h2 class="font-serif text-2xl sm:text-3xl font-extrabold text-slate-950 dark:text-white">ROLE Call for Proposals</h2>
+                            <span class="w-3 h-8 bg-purple-700 rounded-full inline-block" aria-hidden="true"></span>
+                            <h2 id="heading-role-cfp" class="font-serif text-2xl sm:text-3xl font-extrabold text-purple-950">ROLE Call for Proposals</h2>
                         </div>
-                        <button onclick="copySectionLink('role-cfp')" class="no-print text-purple-900 hover:text-purple-700 dark:text-purple-300 text-base" title="Copy section link">
-                            <i class="fa-solid fa-link"></i>
+                        <button onclick="copySectionLink('role-cfp')" class="no-print p-2 rounded-lg text-purple-800 hover:bg-purple-50 text-base transition" title="Copy link to ROLE CFP section" aria-label="Copy direct link to ROLE CFP section">
+                            <i class="fa-solid fa-link" aria-hidden="true"></i>
                         </button>
                     </div>
 
-                    <div class="article-text font-serif text-scale-base space-y-5 text-slate-950 dark:text-slate-50 leading-relaxed">
+                    <div class="article-text font-serif text-scale-base space-y-5 text-slate-800 leading-relaxed">
                         <p>Research in Online Literacy Education (ROLE) is currently accepting proposals, due November 1, 2026. This issue engages with the now seemingly ever-expanding conversation surrounding Artificial Intelligence (AI) and online writing instruction (OWI) and research. See the full call for proposals.</p>
 
                         <div class="pt-2">
-                            <a href="https://docs.google.com/forms/d/1i3hQfLUK1wOEsywbRa95Uf5bWlbopPjax8jE65Vb16M/viewform?edit_requested=true" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-purple-700 hover:bg-purple-800 text-white font-sans font-bold text-sm transition shadow-md">
-                                <i class="fa-solid fa-paper-plane text-lg"></i>
+                            <a href="https://docs.google.com/forms/d/1i3hQfLUK1wOEsywbRa95Uf5bWlbopPjax8jE65Vb16M/viewform?edit_requested=true" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-purple-800 hover:bg-purple-900 text-white font-sans font-bold text-sm transition shadow-md focus:ring-2 focus:ring-purple-400">
+                                <i class="fa-solid fa-paper-plane text-lg" aria-hidden="true"></i>
                                 Submit your Proposal Here Directly
                             </a>
                         </div>
@@ -484,38 +487,38 @@
                 </section>
 
                 <!-- SECTION 8: PUBLISH WITH GSOLE -->
-                <section id="publish-gsole" class="article-section card-bg p-6 sm:p-10 rounded-2xl border border-emerald-900/10 dark:border-slate-800 shadow-sm space-y-6">
-                    <div class="flex items-center justify-between border-b border-slate-300 dark:border-slate-800 pb-4">
+                <section id="publish-gsole" aria-labelledby="heading-publish-gsole" class="article-section card-bg p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-4">
                         <div class="flex items-center space-x-3">
-                            <span class="w-3 h-8 bg-emerald-700 dark:bg-emerald-400 rounded-full inline-block"></span>
-                            <h2 class="font-serif text-2xl sm:text-3xl font-extrabold text-slate-950 dark:text-white">Publish with GSOLE</h2>
+                            <span class="w-3 h-8 bg-emerald-600 rounded-full inline-block" aria-hidden="true"></span>
+                            <h2 id="heading-publish-gsole" class="font-serif text-2xl sm:text-3xl font-extrabold text-slate-900">Publish with GSOLE</h2>
                         </div>
-                        <button onclick="copySectionLink('publish-gsole')" class="no-print text-emerald-800 hover:text-emerald-950 dark:text-emerald-300 text-base" title="Copy section link">
-                            <i class="fa-solid fa-link"></i>
+                        <button onclick="copySectionLink('publish-gsole')" class="no-print p-2 rounded-lg text-emerald-800 hover:bg-emerald-50 text-base transition" title="Copy link to Publish with GSOLE section" aria-label="Copy direct link to Publish with GSOLE section">
+                            <i class="fa-solid fa-link" aria-hidden="true"></i>
                         </button>
                     </div>
 
-                    <div class="article-text font-serif text-scale-base space-y-5 text-slate-950 dark:text-slate-50 leading-relaxed">
+                    <div class="article-text font-serif text-scale-base space-y-5 text-slate-800 leading-relaxed">
                         <p>Consider publishing in one of GSOLE's three Online Literacy Open Resource (OLOR) journals:</p>
 
-                        <ul class="list-disc pl-6 space-y-3.5">
+                        <ul class="list-disc pl-6 space-y-3.5 text-slate-800">
                             <li>
-                                <a href="https://gsole.org/olor/ep" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:text-emerald-300 font-bold underline">OLOR Effective Practices</a> (peer-reviewed) publishes brief, practical articles sharing teaching strategies for online, hybrid, and digitally enhanced learning.
+                                <a href="https://gsole.org/olor/ep" target="_blank" rel="noopener noreferrer" class="text-emerald-800 hover:text-emerald-950 font-bold underline underline-offset-4">OLOR Effective Practices</a> (peer-reviewed) publishes brief, practical articles sharing teaching strategies for online, hybrid, and digitally enhanced learning.
                             </li>
                             <li>
-                                <a href="https://gsole.org/olor/role" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:text-emerald-300 font-bold underline">Research in Online Literacy Education (ROLE)</a> (peer-reviewed) publishes original research and scholarship in literacy-based online education.
+                                <a href="https://gsole.org/olor/role" target="_blank" rel="noopener noreferrer" class="text-emerald-800 hover:text-emerald-950 font-bold underline underline-offset-4">Research in Online Literacy Education (ROLE)</a> (peer-reviewed) publishes original research and scholarship in literacy-based online education.
                             </li>
                             <li>
-                                <a href="https://gsole.org/olor/reviews" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:text-emerald-300 font-bold underline">OLOR Reviews</a> publishes reviews of books and technologies related to online literacy education.
+                                <a href="https://gsole.org/olor/reviews" target="_blank" rel="noopener noreferrer" class="text-emerald-800 hover:text-emerald-950 font-bold underline underline-offset-4">OLOR Reviews</a> publishes reviews of books and technologies related to online literacy education.
                             </li>
                         </ul>
                     </div>
                 </section>
 
                 <!-- Editorial Footer -->
-                <footer class="pt-8 border-t-2 border-purple-900/20 dark:border-slate-800 text-center text-sm font-semibold text-slate-800 dark:text-slate-200 space-y-2">
-                    <p>© September 2026 <a href="https://gsole.org/" target="_blank" rel="noopener noreferrer" class="text-purple-900 dark:text-purple-300 hover:text-purple-200 font-bold underline">Global Society of Online Literacy Educators (GSOLE)</a></p>
-                    <p class="font-serif italic font-medium text-purple-900 dark:text-purple-300">Dedicated to supporting literacy teachers in online and digitally enhanced spaces.</p>
+                <footer class="pt-8 border-t-2 border-purple-200 text-center text-sm font-semibold text-slate-600 space-y-2">
+                    <p>© September 2026 <a href="https://gsole.org/" target="_blank" rel="noopener noreferrer" class="text-purple-800 hover:text-purple-950 font-bold underline underline-offset-4">Global Society of Online Literacy Educators (GSOLE)</a></p>
+                    <p class="font-serif italic font-medium text-purple-900">Dedicated to supporting literacy teachers in online and digitally enhanced spaces.</p>
                 </footer>
 
             </main>
@@ -523,8 +526,8 @@
     </div>
 
     <!-- Notification Toast for Copy Link -->
-    <div id="toast" class="no-print fixed bottom-6 right-6 bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-4 py-3 rounded-lg shadow-xl text-xs font-semibold translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-2">
-        <i class="fa-solid fa-check text-emerald-400 dark:text-emerald-600"></i>
+    <div id="toast" role="status" aria-live="polite" class="no-print fixed bottom-6 right-6 bg-slate-900 text-white border border-slate-700 px-5 py-3.5 rounded-lg shadow-2xl text-sm font-semibold translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-3">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-lg" aria-hidden="true"></i>
         <span id="toast-message">Link copied to clipboard!</span>
     </div>
 
@@ -534,7 +537,9 @@
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (winScroll / height) * 100;
-            document.getElementById("progress-bar").style.width = scrolled + "%";
+            const progressBar = document.getElementById("progress-bar");
+            progressBar.style.width = scrolled + "%";
+            progressBar.setAttribute("aria-valuenow", Math.round(scrolled));
         };
 
         // Font Size Adjuster
@@ -549,8 +554,8 @@
             // Reset button active styles
             Object.values(btns).forEach(btn => {
                 if(btn) {
-                    btn.classList.remove('bg-slate-700', 'shadow-sm', 'text-white');
-                    btn.classList.add('text-slate-300');
+                    btn.classList.remove('bg-purple-800', 'shadow-sm', 'text-white', 'font-black');
+                    btn.classList.add('text-slate-700');
                 }
             });
 
@@ -562,15 +567,19 @@
 
             // Highlight active button
             if (btns[size]) {
-                btns[size].classList.add('bg-slate-700', 'shadow-sm', 'text-white');
-                btns[size].classList.remove('text-slate-300');
+                btns[size].classList.add('bg-purple-800', 'shadow-sm', 'text-white', 'font-black');
+                btns[size].classList.remove('text-slate-700');
             }
         }
 
-        // Mobile Drawer Toggle
+        // Accessible Mobile Drawer Toggle
         function toggleMobileNav() {
             const nav = document.getElementById('mobile-nav');
+            const btn = document.getElementById('mobile-menu-btn');
+            const isHidden = nav.classList.contains('hidden');
+            
             nav.classList.toggle('hidden');
+            btn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
         }
 
         // Search and Filter Functionality
@@ -588,11 +597,10 @@
             });
         }
 
-        // Copy Direct Link to Clipboard
+        // Copy Direct Link to Clipboard with Fallback Strategy
         function copySectionLink(sectionId) {
             const url = window.location.origin + window.location.pathname + '#' + sectionId;
             
-            // Clipboard Fallback Strategy for iFrame compatibility
             const tempInput = document.createElement("input");
             tempInput.value = url;
             document.body.appendChild(tempInput);
